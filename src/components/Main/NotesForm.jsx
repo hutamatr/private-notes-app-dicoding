@@ -1,17 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const NotesForm = ({ onSetNotesData }) => {
   const [notesInput, setNotesInput] = useState({
     title: "",
     body: "",
   });
+  const [isFormEmpty, setIsFormEmpty] = useState(false);
 
   const id = +new Date();
   const date = new Date().toISOString();
 
+  useEffect(() => {
+    setIsFormEmpty(false);
+  }, [notesInput]);
+
   const titleChangeHandler = (event) =>
     setNotesInput((prevState) => {
-      return { ...prevState, title: event.target.value };
+      return {
+        ...prevState,
+        title:
+          event.target.value.length <= 50
+            ? event.target.value
+            : prevState.title,
+      };
     });
 
   const bodyChangeHandler = (event) => {
@@ -24,7 +35,7 @@ const NotesForm = ({ onSetNotesData }) => {
     event.preventDefault();
 
     if (notesInput.title.length < 1 || notesInput.body.length < 1) {
-      return;
+      return setIsFormEmpty(true);
     }
 
     const notes = {
@@ -39,35 +50,49 @@ const NotesForm = ({ onSetNotesData }) => {
       title: "",
       body: "",
     });
+    setIsFormEmpty(false);
   };
   return (
-    <form onSubmit={notesSubmitHandler} className="flex flex-col gap-y-3 ">
-      <label htmlFor="title" className="text-custom-green">
-        Title
-      </label>
-      <input
-        type="text"
-        onChange={titleChangeHandler}
-        value={notesInput.title}
-        className="rounded-md p-2 outline-none"
-      />
-      <label htmlFor="notes-body" className="text-custom-green">
-        Notes
-      </label>
-      <textarea
-        name="notes-body"
-        type="text"
-        id="notes-body"
-        cols="30"
-        rows="5"
-        onChange={bodyChangeHandler}
-        value={notesInput.body}
-        className="rounded-md p-2 outline-none"
-      ></textarea>
-      <button className="bg-custom-green py-2 px-4 rounded-md max-w-fit mx-auto hover:bg-custom-orange duration-500">
-        Submit
-      </button>
-    </form>
+    <>
+      {isFormEmpty && (
+        <p className="text-lg text-red-700 font-semibold text-center">
+          Please input notes correctly!
+        </p>
+      )}
+      <form onSubmit={notesSubmitHandler} className="flex flex-col gap-y-3 ">
+        <div className="flex flex-row items-center justify-between">
+          <label htmlFor="title" className="text-custom-black">
+            Title
+          </label>
+          <p className="text-sm font-light flex flex-row gap-x-1 text-custom-black">
+            Remaining title character :
+            <span className="font-medium">{50 - notesInput.title.length}</span>
+          </p>
+        </div>
+        <input
+          type="text"
+          onChange={titleChangeHandler}
+          value={notesInput.title}
+          className="rounded-md p-2 outline-none bg-white ring-2 ring-custom-green"
+        />
+        <label htmlFor="notes-body" className="text-custom-black">
+          Notes
+        </label>
+        <textarea
+          name="notes-body"
+          type="text"
+          id="notes-body"
+          cols="30"
+          rows="5"
+          onChange={bodyChangeHandler}
+          value={notesInput.body}
+          className="rounded-md p-2 outline-none bg-custom-primary ring-2 ring-custom-green"
+        ></textarea>
+        <button className="bg-custom-black text-custom-green py-2 px-4 rounded max-w-fit mx-auto hover:bg-custom-orange duration-500">
+          Submit
+        </button>
+      </form>
+    </>
   );
 };
 

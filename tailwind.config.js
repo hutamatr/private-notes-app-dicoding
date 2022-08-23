@@ -4,11 +4,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "custom-white": "#ECE5E6",
-        "custom-green": "#107263",
-        "custom-yellow": "#ffde62",
-        "custom-orange": "#ff7c5f",
-        "custom-black": "#3f3f3f",
+        "custom-black": "#24282C",
+        "custom-white": "#fbfbf8",
+        "custom-white-2": "#EAE9E2",
+        "custom-green": "#D3F36A",
+        "custom-blue": "#CDDFE3",
       },
       boxShadow: {
         "material-shadow":

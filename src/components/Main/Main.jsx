@@ -9,19 +9,26 @@ const Main = () => {
 
   const notesDataHandler = (notes) => {
     setNotesData((prevState) => {
-      return [notes, ...prevState];
+      return [...prevState, notes];
     });
   };
 
+  const notesDeleteHandler = (id) => {
+    const notesDeleted = notesData.filter((note) => note.id !== id);
+    setNotesData(notesDeleted);
+  };
+
+  console.table(notesData);
+
   return (
     <>
-      <section className="flex flex-col gap-y-4 bg-custom-white p-4 rounded-md shadow-material-shadow">
-        <h1 className="text-custom-orange text-center font-medium text-2xl">
+      <section className="flex flex-col gap-y-6 p-4 rounded md:w-1/2 md:translate-x-1/2">
+        <h1 className="text-custom-black text-center font-medium text-2xl bg-custom-green max-w-fit mx-auto p-1 rounded-sm ring-2 ring-custom-black">
           Notes
         </h1>
         <NotesForm onSetNotesData={notesDataHandler} />
       </section>
-      <NotesList onNotesData={notesData} />
+      <NotesList onNotesData={notesData} onDeleteNotes={notesDeleteHandler} />
     </>
   );
 };

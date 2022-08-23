@@ -1,16 +1,15 @@
 import React from "react";
 
-import Card from "../UI/Card";
-import { showFormattedDate } from "../../utils";
+import NotesCard from "../UI/NotesCard";
 
-const NotesList = ({ onNotesData }) => {
+const NotesList = ({ onNotesData, onDeleteNotes }) => {
   return (
     <section>
-      <ul className="grid grid-cols-1 gap-4 md:grid-cols-3">
+      <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
         {onNotesData.map((note, index) => {
           return (
             <li key={index}>
-              <Card {...note} onFormatDate={showFormattedDate} />
+              <NotesCard {...note} onDeleteNotes={onDeleteNotes} />
             </li>
           );
         })}
