@@ -18,7 +18,7 @@ const Navigation = () => {
         <form onSubmit={inputSearchSubmitHandler}>
           <input
             type="text"
-            className="outline-none p-2 rounded bg-custom-green text-custom-black font-medium placeholder:font-light placeholder:text-slate-400"
+            className="outline-none p-2 rounded bg-custom-green text-custom-black font-medium placeholder:text-custom-black"
             placeholder="Search notes"
             value={inputSearch}
             onChange={inputSearchHandler}

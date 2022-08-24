@@ -2,7 +2,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 
 import App from "./App";
-import NotesProvider from "./components/context/NotesProvider";
+import NotesProvider from "./context/NotesProvider";
 
 import "./styles/style.css";
 

@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
-const NotesForm = ({ onSetNotesData }) => {
+import NotesContext from "../../context/NotesContext";
+
+const NotesForm = () => {
+  const { addNotes } = useContext(NotesContext);
   const [notesInput, setNotesInput] = useState({
     title: "",
     body: "",
   });
   const [isFormEmpty, setIsFormEmpty] = useState(false);
 
-  const id = +new Date();
+  const id = +Date.now();
   const date = new Date().toISOString();
 
   useEffect(() => {
@@ -45,7 +48,8 @@ const NotesForm = ({ onSetNotesData }) => {
       ...notesInput,
     };
 
-    onSetNotesData(notes);
+    addNotes(notes);
+
     setNotesInput({
       title: "",
       body: "",
