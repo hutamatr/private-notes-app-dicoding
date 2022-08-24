@@ -1,24 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import { showFormattedDate } from "../../utils";
 
-const Card = ({ id, title, body, createdAt, archived, onDeleteNotes }) => {
-  const [notesCompleted, setNotesCompleted] = useState(archived);
-
-  const notesArchivedHandler = () => {
-    setNotesCompleted((prevState) => !prevState);
-  };
-
+const Card = ({
+  id,
+  title,
+  body,
+  createdAt,
+  archived,
+  onDeleteNotes,
+  onNotesArchivedHandler,
+  onIsNotesArchived,
+}) => {
   return (
     <div
       className={`grid grid-cols-1 grid-rows-[auto,1fr,auto] gap-y-3 items-start rounded bg-custom-green p-4 shadow-material-shadow min-h-full ${
-        notesCompleted ? "ring-2 ring-custom-black" : ""
+        onIsNotesArchived ? "ring-2 ring-custom-black" : ""
       }`}
     >
       <div className="flex items-start justify-between gap-x-3">
         <h2 className="text-md font-semibold overflow-auto break-all">
           {title}
         </h2>
-        {notesCompleted && (
+        {onIsNotesArchived && (
           <span className="text-xs font-medium uppercase bg-custom-black text-custom-green p-1 rounded-sm">
             Archived!
           </span>
@@ -31,16 +34,18 @@ const Card = ({ id, title, body, createdAt, archived, onDeleteNotes }) => {
         </span>
         <div className="flex items-center gap-x-3 text-3xl">
           <button
-            onClick={notesArchivedHandler}
-            className={`text-sm ${
-              notesCompleted ? "text-custom-black" : "text-custom-black"
+            onClick={onNotesArchivedHandler.bind(this, id)}
+            className={`text-sm font-medium ${
+              onIsNotesArchived
+                ? "text-custom-green px-1 rounded-sm bg-custom-black"
+                : "text-custom-black"
             }`}
           >
             Archive
           </button>
           <button
             onClick={onDeleteNotes.bind(this, id)}
-            className="text-red-700 text-sm"
+            className="text-red-700 text-sm font-medium"
           >
             Delete
           </button>

@@ -61,10 +61,13 @@ const NotesForm = ({ onSetNotesData }) => {
       )}
       <form onSubmit={notesSubmitHandler} className="flex flex-col gap-y-3 ">
         <div className="flex flex-row items-center justify-between">
-          <label htmlFor="title" className="text-custom-black">
+          <label
+            htmlFor="title"
+            className="text-custom-green bg-custom-black px-1 rounded-sm"
+          >
             Title
           </label>
-          <p className="text-sm font-light flex flex-row gap-x-1 text-custom-black">
+          <p className="text-sm flex flex-row gap-x-1 text-custom-green bg-custom-black px-1 rounded-sm">
             Remaining title character :
             <span className="font-medium">{50 - notesInput.title.length}</span>
           </p>
@@ -73,9 +76,12 @@ const NotesForm = ({ onSetNotesData }) => {
           type="text"
           onChange={titleChangeHandler}
           value={notesInput.title}
-          className="rounded-md p-2 outline-none bg-white ring-2 ring-custom-green"
+          className="rounded-md p-2 outline-none bg-white ring-2 ring-custom-black"
         />
-        <label htmlFor="notes-body" className="text-custom-black">
+        <label
+          htmlFor="notes-body"
+          className="text-custom-green bg-custom-black px-1 rounded-sm max-w-fit"
+        >
           Notes
         </label>
         <textarea
@@ -86,9 +92,9 @@ const NotesForm = ({ onSetNotesData }) => {
           rows="5"
           onChange={bodyChangeHandler}
           value={notesInput.body}
-          className="rounded-md p-2 outline-none bg-custom-primary ring-2 ring-custom-green"
+          className="rounded-md p-2 outline-none bg-custom-primary ring-2 ring-custom-black"
         ></textarea>
-        <button className="bg-custom-black text-custom-green py-2 px-4 rounded max-w-fit mx-auto hover:bg-custom-orange duration-500">
+        <button className="bg-custom-black text-custom-green py-2 px-4 rounded max-w-fit mx-auto hover:bg-custom-green hover:text-custom-black hover:font-medium duration-300">
           Submit
         </button>
       </form>
