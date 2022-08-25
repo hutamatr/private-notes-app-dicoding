@@ -72,7 +72,7 @@ const NotesForm = () => {
             Title
           </label>
           <p className="text-xs flex flex-row items-center gap-x-1 text-custom-green bg-custom-black px-1 rounded-sm break-words font-semibold">
-            {0 + notesInput.title.length}/50
+            {50 - notesInput.title.length}
           </p>
         </div>
         <input
