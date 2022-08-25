@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 
 import NotesCard from "../UI/NotesCard";
-import NotesContext from "../../context/NotesContext";
+import Search from "../Search/Search";
 
 const NotesList = () => {
-  const { notes } = useContext(NotesContext);
+  const [search, setSearch] = useState([]);
 
-  const notesActive = notes.filter((note) => !note.archived);
-  const notesArchived = notes.filter((note) => note.archived);
+  const notesActive = search.filter((note) => !note.archived);
+  const notesArchived = search.filter((note) => note.archived);
 
   const notesContentList = (notesData) => {
     return (
@@ -39,7 +39,8 @@ const NotesList = () => {
   ];
 
   return (
-    <section className="flex flex-col gap-y-12">
+    <section className="flex flex-col gap-y-8">
+      <Search onSetSearch={setSearch} />
       {notesContent.map((content, index) => {
         return (
           <div className="flex flex-col gap-y-4" key={index}>

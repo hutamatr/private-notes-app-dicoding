@@ -64,16 +64,15 @@ const NotesForm = () => {
         </p>
       )}
       <form onSubmit={notesSubmitHandler} className="flex flex-col gap-y-3 ">
-        <div className="flex flex-row items-center justify-between">
+        <div className="flex flex-row items-end gap-x-2 justify-between">
           <label
             htmlFor="title"
             className="text-custom-green bg-custom-black px-1 rounded-sm"
           >
             Title
           </label>
-          <p className="text-sm flex flex-row gap-x-1 text-custom-green bg-custom-black px-1 rounded-sm">
-            Remaining title character :
-            <span className="font-medium">{50 - notesInput.title.length}</span>
+          <p className="text-xs flex flex-row items-center gap-x-1 text-custom-green bg-custom-black px-1 rounded-sm break-words font-semibold">
+            {0 + notesInput.title.length}/50
           </p>
         </div>
         <input
